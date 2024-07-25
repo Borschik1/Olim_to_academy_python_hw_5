@@ -1,22 +1,22 @@
 import hw_5_SRTINGS
-from hw_5 import Planet, AerialAnimals, AquaticAnimals, LandAnimals
+from hw_5 import Planet
 
 planet = Planet()
 
-planet.add_kind("Wolf", 3, True, "Land", 15)
-planet.add_kind("Mouse", 1, False, "Land", 6)
-planet.add_kind("Lion", 4, True, "Land", 21)
-planet.add_kind("Deer", 4, False, "Land", 12)
+planet.add_kind("Wolf", 3, "Land", 15, True, ["Deer", "Cat"])
+planet.add_kind("Mouse", 1, "Land", 6, False)
+planet.add_kind("Cat", 4, "Land", 12, True, ["Mouse", "Dove", "Kiwi"])
+planet.add_kind("Deer", 4, "Land", 12, False)
 
-planet.add_kind("Shark", 4, True, "Water", 30)
-planet.add_kind("Dolphin", 3, True, "Water", 30)
-planet.add_kind("Tuna", 3, True, "Water", 12)
-planet.add_kind("Carp", 2, False, "Water", 21)
+planet.add_kind("Shark", 4, "Water", 30, True, ["Tuna", "Carp"])
+planet.add_kind("Dolphin", 3, "Water", 30, True, ["Carp", "Tuna"])
+planet.add_kind("Tuna", 3, "Water", 12, True, ["Carp"])
+planet.add_kind("Carp", 2, "Water", 21, False)
 
-planet.add_kind("Pelican", 3, True, "Air", 24)
-planet.add_kind("Dove", 1, False, "Air", 9)
-planet.add_kind("Albatross", 5, True, "Air", 30)
-planet.add_kind("Kiwi", 1, False, "Air", 21)
+planet.add_kind("Pelican", 3, "Air", 24, True, ["Carp", "Tuna"])
+planet.add_kind("Dove", 1, "Air", 9, False)
+planet.add_kind("Eagle", 2, "Air", 24, True, ["Mouse"])
+planet.add_kind("Kiwi", 1, "Air", 21, False)
 
 print(hw_5_SRTINGS.WELCOME_STRING)
 planet.show_kinds()
