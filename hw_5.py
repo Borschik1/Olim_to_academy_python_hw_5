@@ -21,8 +21,8 @@ class Planet:
         self.id_counter += 1
         return self.id_counter
 
-    def add_kind(self, name, size, predator_flag, habitat, max_age):
-        self.dict_kind_names[name] = Kind(name, size, predator_flag, habitat, max_age)
+    def add_kind(self, name, size, habitat, max_age, predator_flag, prey_kind_list=[]):
+        self.dict_kind_names[name] = Kind(name, size, habitat, max_age, predator_flag, prey_kind_list)
 
     def reproduce(self, id_1, id_2):
         if id_1 == id_2:
@@ -145,10 +145,11 @@ class Planet:
 
 
 class Kind:
-    def __init__(self, name, size, predator_flag, habitat, max_age):
+    def __init__(self, name, size, habitat, max_age, predator_flag, prey_kind_list=None):
         self.name = name
         self.size = size
         self.predator_flag = predator_flag
+        self.prey_kind_list = prey_kind_list
         self.habitat = habitat
         self.max_age = max_age
 
@@ -192,12 +193,14 @@ class Animal():
             return
         if self.kind.predator_flag:
             if random.randint(1, 2) == 1:
+                prey_list = []
+                for animal in self.planet.herbivores + self.planet.predators:
+                    if animal.kind.name in self.kind.prey_kind_list:
+                        prey_list.append(animal)
                 try:
-                    self.planet.herbivores[
-                        random.randint(0, len(self.planet.herbivores) - 1)].dead()
+                    prey_list[random.randint(0, len(prey_list) - 1)].dead()
                     self.satiety += 53
                     self.is_it_ate = True
-
                 except ValueError:
                     self.satiety -= 16
             else:
